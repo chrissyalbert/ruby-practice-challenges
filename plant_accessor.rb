@@ -20,12 +20,3 @@ plant_water = my_plant.water_pref
 
 puts "The #{plant_name} does best in #{plant_zone} #{plant_water} #{plant_light} conditions."
 
-
-
-	
-
-	
-	
-	
-	
-
