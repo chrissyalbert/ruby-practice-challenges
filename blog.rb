@@ -1,13 +1,15 @@
 class Blog
 
-	@@total_posts = 0
+	@@total_num_posts = 0
+	@@total_whole_posts_array = []
+	@@total_whole_posts_hash = {}
 	
 	def initialize
-	@@total_posts += 1
+	@@total_num_posts += 1
 	end
 	
 	def self.current_count	
-	puts "There are currently #{@@total_posts} posts on this blog."
+	return @@total_posts
 	end
 	
 end
