@@ -3,6 +3,10 @@ class Blog
 	@@total_num_posts = 0
 	@@total_whole_posts_array = []
 
+  def self.all
+    @@total_whole_posts_array
+  end
+
 	def self.current_count(post)
    		@@total_whole_posts_array << post
     	@@total_num_posts += 1
@@ -10,36 +14,30 @@ class Blog
 
 	def self.publish
     	@@total_whole_posts_array.each do |post|
-      puts "Title:\n #{@title}"
-      puts "Body:\n #{@content}"
-      puts "Publish Date:\n #{@publish_date}"
+      puts "Title:\n #{post.title}"
+      puts "Body:\n #{post.content}"
+      puts "Publish Date:\n #{post.publish_date}"
     end	
 end
 
 class Blogpost < Blog
 
-	def initialize()# I got the idea for this from 'Classes, Objects, Variables'
-		@title	= title # from http://phrogz.net/programmingruby/frameset.html website
-		@author	= author
-		@publish_date = publish_date
-		@content = content
-	end
-	
 	def self.create
    		post = self.new
    		puts "What is the title of your blog post?"
-		@title = gets.chomp
+		post.title = gets.chomp
 		puts "What is your name?"
-		@author = gets.chomp
-		time = Time
-		@publish_date = time.now.month + time.now.day + time.now.year
+		post.author = gets.chomp
+		post.publish_date = Time.now
 		puts "Please enter your blog post content here."
-		@content = gets
+		post.content = gets
     	post.save
 		puts "Do you want to create another blog post? Y/N?"
 		create if gets.chomp.downcase == 'y'	
 	end
 
+	attr_accessor :title, :author, :publish_date, :content
+	
 	def save
 		Blogpost.current_count(self)
 	end
@@ -47,5 +45,7 @@ class Blogpost < Blog
 end
 
 Blogpost.create
+total_whole_posts_array = Blogpost.all
+puts total_whole_posts_array.inspect
 Blogpost.publish
 end
